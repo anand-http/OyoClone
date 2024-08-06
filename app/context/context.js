@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 
 export function AppProvider({ children }) {
-    const [city, setCity] = useState("All-Cities");
+    const [city, setCity] = useState();
     const [auth, setAuth] = useState();
 
     useEffect(() => {
