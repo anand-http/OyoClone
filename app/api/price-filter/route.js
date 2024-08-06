@@ -14,7 +14,6 @@ export const GET = async (request) => {
 
         const { searchParams } = new URL(request.url);
         const price = searchParams.get('price');
-        console.log(price);
 
         const findHotels = await Hotels.find({ price: { $lte: price } })
 

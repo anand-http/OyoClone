@@ -10,7 +10,7 @@ import { GiElevator } from "react-icons/gi";
 import { MdPower } from "react-icons/md";
 import { getSingleHotel } from '@/app/lib/getSingleHotel'
 import Link from 'next/link'
-import SkeletonLoader from '@/app/components/SkeletonLoader'
+import SkeletonLoader from '@/app/components/skeletonLoader'
 
 const SingleHotel = () => {
     const { auth } = useContext(AppContext);

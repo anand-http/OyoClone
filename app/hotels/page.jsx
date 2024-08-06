@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Hotel from "../components/hotel";
 import Header from "../components/header";
 import Filter from "../components/filters";
 import axios from "axios";
 import SkeletonLoader from "../components/skeletonLoader";
-import { getHotels } from "../lib/getHotel";
+import { AppContext } from "../context/context";
 
 
 const Hotels = () => {
@@ -14,13 +14,24 @@ const Hotels = () => {
   const [hotelsDetail, setHotelDetail] = useState();
   const [loading, setLoading] = useState(false);
 
+  const { city } = useContext(AppContext);
+
 
   useEffect(() => {
+
     const handleHotelDetail = async () => {
       setLoading(true);
-      const hotel = await getHotels();
-      setHotelDetail(hotel);
-      setLoading(false);
+      try {
+        const res = await axios.get(`/api/hotels?city=${city}`);
+        const hotel = res.data.findHotels;
+        setHotelDetail(hotel);
+      } catch (error) {
+        console.error("Error fetching hotels:", error);
+      }
+      finally {
+        setLoading(false);
+      }
+
     }
     handleHotelDetail();
   }, [])

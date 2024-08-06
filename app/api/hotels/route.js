@@ -44,25 +44,23 @@ export const GET = async (request) => {
     try {
 
         const { searchParams } = new URL(request.url);
-        const city = searchParams.get('city');
+        const city = searchParams.getAll('city');
 
-        const findHotels = await Hotels.find({ location: city });
+        // const findHotels = await Hotels.find({ location: city });
 
-        if (findHotels.length > 0) {
-            return NextResponse.json({
-                msg: "ok 200",
-                hotels: findHotels
-            })
+        let findHotels;
+        if (city.length > 0) {
+            findHotels = await Hotels.find({ location: city })
         }
         else {
-            const allHotels = await Hotels.find({});
-
-            return NextResponse.json({
-                msg: "ok 200",
-                hotels: allHotels
-
-            })
+            findHotels = await Hotels.find({});
         }
+
+        return NextResponse.json({
+            msg: "Hotels Found",
+            findHotels
+        });
+
     } catch (error) {
         console.log(error)
         return NextResponse.json({
