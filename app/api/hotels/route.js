@@ -43,29 +43,19 @@ export const GET = async (request) => {
 
     try {
 
-        const { searchParams } = new URL(request.url);
-        const city = searchParams.getAll('city');
-
-        // const findHotels = await Hotels.find({ location: city });
-
-        let findHotels;
-        if (city.length > 0) {
-            findHotels = await Hotels.find({ location: city })
-        }
-        else {
-            findHotels = await Hotels.find({});
-        }
+        const findHotels = await Hotels.find({});
 
         return NextResponse.json({
-            msg: "Hotels Found",
-            findHotels
+            msg: findHotels.length > 0 ? " Hotels found " : "No hotels found",
+
+            findHotels,
         });
 
     } catch (error) {
         console.log(error)
         return NextResponse.json({
-            err: "error while find hotels",
-            error
+            err: "Error while finding hotels",
+            error: error.message,
         })
     }
 }

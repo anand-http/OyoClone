@@ -1,3 +1,4 @@
+import React from "react";
 
 const Filter = ({ price, setPrice, handlePriceFilter, checked, setChecked }) => {
 

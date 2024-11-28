@@ -6,7 +6,6 @@ import Cookies from 'js-cookie'
 
 
 export function AppProvider({ children }) {
-    const [city, setCity] = useState();
     const [auth, setAuth] = useState();
 
     useEffect(() => {
@@ -23,7 +22,7 @@ export function AppProvider({ children }) {
     
 
     return (
-        <AppContext.Provider value={{ city, setCity, auth,updateAuth }}>
+        <AppContext.Provider value={{ auth,updateAuth }}>
             {children}
         </AppContext.Provider>
     );
